@@ -12,8 +12,8 @@ def obtener_datos_proyecto(request):
         # Imprimir los datos recibidos para depuración
         print("Datos recibidos:", data)
 
-        # Validar que todos los campos necesarios estén presentes y tengan valores válidos
-        required_fields = ['cantidad_valores', 'proyecto_id', 'campo', 'fecha_inicio', 'fecha_fin']
+        # Validar que todos los campos necesarios estén presentes
+        required_fields = ['cantidad_valores', 'proyecto_id', 'campo']
         for field in required_fields:
             if field not in data:
                 raise ValueError(f"Falta el campo '{field}' en la solicitud")
@@ -22,10 +22,10 @@ def obtener_datos_proyecto(request):
         cantidad_valores = data['cantidad_valores']
         proyecto_id = data['proyecto_id']
         campo = data['campo']
-        fecha_inicio = data['fecha_inicio']
-        fecha_fin = data['fecha_fin']
-        hora_inicio = data.get('hora_inicio')  # Obtener la hora de inicio si está presente, o None si no lo está
-        hora_fin = data.get('hora_fin')  # Obtener la hora de fin si está presente, o None si no lo está
+        fecha_inicio = data.get('fecha_inicio')
+        fecha_fin = data.get('fecha_fin')
+        hora_inicio = data.get('hora_inicio')
+        hora_fin = data.get('hora_fin')
 
         # Construir la consulta SQL base
         sql_query = '''
@@ -38,12 +38,14 @@ def obtener_datos_proyecto(request):
             AND dd.proyecto_id = %s
         '''
 
-        # Agregar condiciones de filtrado para el campo y el rango de fechas si están presentes
         params = [campo, proyecto_id]
+
+        # Agregar condiciones de filtrado para la fecha si están presentes
         if fecha_inicio and fecha_fin:
             sql_query += ' AND DATE(dv.fecha_hora_lectura) BETWEEN %s AND %s'
             params.extend([fecha_inicio, fecha_fin])
-        if hora_inicio is not None and hora_fin is not None:
+        # Agregar condiciones de filtrado para la hora si están presentes
+        if hora_inicio and hora_fin:
             sql_query += ' AND TIME(dv.fecha_hora_lectura) BETWEEN %s AND %s'
             params.extend([hora_inicio, hora_fin])
 
@@ -76,9 +78,13 @@ def obtener_datos_proyecto(request):
         # Tomar la cantidad especificada de valores
         df = df.head(cantidad_valores)
 
+        # Convertir la columna de fecha y hora a cadenas
+        df['fecha'] = df['fecha_hora_lectura'].dt.strftime('%Y-%m-%d')
+        df['hora'] = df['fecha_hora_lectura'].dt.strftime('%H:%M:%S')
+
         # Preparar los datos de respuesta
         response_data = {
-            "datos": df[['id', 'valor']].to_dict(orient='records'),
+            "datos": df[['id', 'valor', 'fecha', 'hora']].to_dict(orient='records'),
         }
 
         # Devolver los datos en formato JSON
