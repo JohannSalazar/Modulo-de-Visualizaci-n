@@ -1,10 +1,6 @@
-from django.conf.urls import url
+from django.urls import path
 from API import views
 
 urlpatterns = [
-    url(r'^consultar_datos/$', views.obtener_datos_proyecto, name='consultar_datos'),
-]
-
-urlpatterns = [
-    url(r'^consultar_datos/$', views.obtener_datos_proyecto, name='consultar_datos'),
+    path('consultardatos/', views.obtener_datos_proyecto, name='consultar_datos'),
 ]
