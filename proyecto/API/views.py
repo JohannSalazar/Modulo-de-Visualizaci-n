@@ -80,12 +80,30 @@ def obtener_datos_proyecto(request):
 
         # Convertir la columna de fecha y hora a cadenas
         df['fecha'] = df['fecha_hora_lectura'].dt.strftime('%Y-%m-%d')
-        df['hora'] = df['fecha_hora_lectura'].dt.strftime('%H:%M:%S')
+
+        # Convertir la columna de hora a cadenas si están presentes
+        if hora_inicio and hora_fin:
+            df['hora'] = df['fecha_hora_lectura'].dt.strftime('%H:%M:%S')
+
+        # Eliminar la columna original de fecha_hora_lectura si no es necesaria
+        del df['fecha_hora_lectura']
 
         # Preparar los datos de respuesta
         response_data = {
-            "datos": df[['id', 'valor', 'fecha', 'hora']].to_dict(orient='records'),
+            "datos": []
         }
+
+        for index, row in df.iterrows():
+            # Agregar cada registro al JSON de respuesta
+            data_row = {
+                "id": row['id'],
+                "valor": row['valor']
+            }
+            if fecha_inicio and fecha_fin:
+                data_row["fecha"] = row['fecha']
+            if hora_inicio and hora_fin:
+                data_row["hora"] = row['hora']
+            response_data['datos'].append(data_row)
 
         # Devolver los datos en formato JSON
         return HttpResponse(json.dumps(response_data), content_type='application/json')
