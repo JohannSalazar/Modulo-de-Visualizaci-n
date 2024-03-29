@@ -1,0 +1,106 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #039716;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Estilos para el menú */
+.sidebar {
+    background-color: #039716;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    height: 100%;
+    margin: 0;
+    width: 220px;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.sidebar h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.nav-link {
+    color: #fff !important; /* Importante para sobrescribir los estilos de Bootstrap */
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #48b202 !important; /* Importante para sobrescribir los estilos de Bootstrap */
+    color: #fff !important; /* Importante para sobrescribir los estilos de Bootstrap */
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown-menu {
+    background-color: #039716;
+    border: none;
+}
+
+.dropdown-item {
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #fafafa;
+    color: #000;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Estilos para el footer */
+footer {
+    background-color: #9c9c9c;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+/* Estilos para el contenido */
+main {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    align-items: flex-start;
+    margin-left: 220px; /* Para dejar espacio al menú */
+}
+
+/* Estilos para el contenedor del formulario y las gráficas */
+#form_graf_container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: calc(100% - 220px); /* Para dejar espacio al menú */
+}
+
+/* Estilos para el formulario y las gráficas */
+#formulario_humedad,
+#formulario_temperatura,
+#grafica {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}

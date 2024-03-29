@@ -1,0 +1,41 @@
+#formulario {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin: 0; /* Elimina todos los márgenes */
+}
+
+
+.form-control-sm {
+    font-size: 12px; /* Ajusta el tamaño de la fuente según sea necesario */
+    padding: 0.25rem 0.5rem; /* Ajusta el relleno según sea necesario */
+}
+
+.smaller-button {
+    width: 100px; /* Ajusta el ancho según sea necesario */
+    /* Otros estilos personalizados */
+}
+
+/* estilos.css */
+
+/* Estilos para el input de tipo color */
+#formulario input[type="color"] {
+    height: 1rem; /* Cambia este valor según lo necesites */
+    width: 1rem; /* Cambia este valor según lo necesites */
+    /* Otros estilos si es necesario */
+}
+
+.color-preview {
+    width: 2rem; /* Cambia este valor según lo necesites */
+    height: 2rem; /* Cambia este valor según lo necesites */
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+.color-icon i {
+    display: inline-block; /* Asegura que el icono se muestre correctamente */
+}
+  
+ 
+

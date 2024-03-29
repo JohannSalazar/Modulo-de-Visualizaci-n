@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Módulo de visualización</title>
+    <link href="{% static 'bootstrap5.0.2/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/graficas.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+</head>
+<body>
+<header>
+    <h1>Módulo de visualización</h1>
+</header>
+
+<div id="menu-container">
+    <div class="sidebar">
+        <h1 class="fw-bold">Menú</h1>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link fw-bold" href="#">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link fw-bold dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    Seleccionar formulario
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item fw-bold" href="#" onclick="mostrarFormulario('formulario_humedad')">Humedad</a></li>
+                    <li><a class="dropdown-item fw-bold" href="#" onclick="mostrarFormulario('formulario_temperatura')">Temperatura</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<main>
+    <!-- Contenedor para el formulario y las gráficas -->
+    <div id="form_graf_container">
+        <!-- Formulario -->
+        <div id="formulario_humedad">
+            {% include 'formHumedad.html' %}
+        </div>
+        <div id="formulario_temperatura" style="display: none;">
+            {% include 'formTemperatura.html' %}
+        </div>
+        <!-- Gráficas -->
+        <div id="grafica">
+            {% if graph_html %}
+                {{ graph_html | safe }}
+            {% endif %}
+        </div>
+    </div>
+</main>
+
+<footer>
+    <h2>Espacio para poner contactos</h2>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+<script src="{% static 'bootstrap5.0.2/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'bootstrap5.0.2/js/bootstrap.bundle.min.js' %}"></script>
+<script>
+    // Función para mostrar el formulario seleccionado y ocultar los demás
+    function mostrarFormulario(idFormulario) {
+        var formularios = ["formulario_humedad", "formulario_temperatura"];
+        for (var i = 0; i < formularios.length; i++) {
+            var formulario = document.getElementById(formularios[i]);
+            if (formularios[i] === idFormulario) {
+                formulario.style.display = "block";
+            } else {
+                formulario.style.display = "none";
+            }
+        }
+        document.getElementById("grafica").style.display = "none";
+    }
+</script>
+</body>
+</html>

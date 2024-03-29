@@ -99,3 +99,4 @@ def obtener_datos_proyecto(request):
         # Error interno del servidor
         response_data = {'error': 'Ocurrió un error interno en el servidor'}
         return HttpResponse(json.dumps(response_data), content_type='application/json', status=500)
+
