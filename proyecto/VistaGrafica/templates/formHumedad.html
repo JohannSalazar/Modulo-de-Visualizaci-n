@@ -1,0 +1,59 @@
+<section id="formulario" class="container">
+    <h1 class="text-center">Generar gráfica de humedad</h1>
+    <form method="post" class="formulario">
+        {% csrf_token %}
+        <div class="row">
+            <!-- Columna izquierda -->
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="cantidad_valores" class="form-label fw-bold">Valores:</label>
+                    <input type="number" class="form-control form-control-sm" id="cantidad_valores" name="cantidad_valores" required min="1">
+                </div>
+                <div class="mb-3">
+                    <label for="fecha_inicio" class="form-label fw-bold">Inicio:</label>
+                    <input type="date" class="form-control form-control-sm" id="fecha_inicio" name="fecha_inicio">
+                </div>
+                <div class="mb-3">
+                    <label for="fecha_fin" class="form-label fw-bold">Fin:</label>
+                    <input type="date" class="form-control form-control-sm" id="fecha_fin" name="fecha_fin">
+                </div>
+            </div>
+            <!-- Columna derecha -->
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="hora_inicio" class="form-label fw-bold">Inicio:</label>
+                    <input type="time" class="form-control form-control-sm" id="hora_inicio" name="hora_inicio">
+                </div>
+                <div class="mb-3">
+                    <label for="hora_fin" class="form-label fw-bold">Fin:</label>
+                    <input type="time" class="form-control form-control-sm" id="hora_fin" name="hora_fin">
+                </div>
+                <div class="mb-3">
+                    <label for="tipo_grafica" class="form-label fw-bold">Tipo:</label>
+                    <select class="form-select form-select-sm" id="tipo_grafica" name="tipo_grafica">
+                        <option value="barras">Barras</option>
+                        <option value="dispersion">Dispersión</option>
+                        <option value="lineal">Lineal</option>
+                    </select>
+                </div>
+                <div class="color-picker">
+                    <label for="color" class="form-label fw-bold">Color:</label>
+                    <div class="color-preview" id="color-preview"></div>
+                    <input type="color" class="form-control" id="color" name="color">
+                </div><br>
+                <!-- Campo oculto para el id del proyecto -->
+                <input type="hidden" id="proyecto_id" name="proyecto_id" value="1">
+                <input type="hidden" id="campo" name="campo" value="temperatura">
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary smaller-button fw-bold">Crear</button>
+        </div>
+    </form>
+</section>
+<script>
+    document.getElementById('color').addEventListener('input', function() {
+        document.getElementById('color-preview').style.backgroundColor = this.value;
+      });
+      
+</script>

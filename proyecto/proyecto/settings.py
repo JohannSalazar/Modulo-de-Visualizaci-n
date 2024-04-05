@@ -80,12 +80,17 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sistema_iot',  # Reemplaza con el nombre de tu base de datos en XAMPP
         'USER': 'root',  # Puede ser 'root' o cualquier otro usuario que hayas configurado
-        'PASSWORD': '123',  # Contraseña de tu usuario de MySQL
+        'PASSWORD': '',  # Contraseña de tu usuario de MySQL
         'HOST': 'localhost',  # Puedes dejarlo como localhost si la base de datos está en la misma máquina
         'PORT': '3306',  # Puerto por defecto de MySQL
     }
 }
 
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+    # Agrega otros orígenes permitidos según sea necesario
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
